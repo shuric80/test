@@ -32,7 +32,7 @@ def processing(text: str) -> List[str]:
 
 
 @click.command()
-@click.argument('uri')
+@click.option('--uri', default='http://az.lib.ru/t/tolstoj_lew_nikolaewich/text_0073.shtml', help='URL page')
 @click.option('--n', default=10, help='show most commonly words.')
 def main(uri: str, n: int):
     response = requests.get(uri, stream=True)
