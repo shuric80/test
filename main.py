@@ -1,11 +1,14 @@
 import collections
 import re
 import string
+from typing import List
 
 import click
 import requests
 from stop_words import get_stop_words
 
+
+RUSSIAN_ALPHABET = [chr(letter) for letter in range(1072, 1104)]
 stop_words = get_stop_words('russian')
 
 
@@ -15,10 +18,7 @@ def clear_text(html: str) -> str:
     return text
 
 
-RUSSIAN_ALPHABET = [chr(letter) for letter in range(1072, 1104)]
-
-
-def processing(text: str) -> str:
+def processing(text: str) -> List[str]:
     for letter in string.punctuation:
         text = text.replace(letter, ' ')
 
@@ -61,8 +61,8 @@ def main(uri: str, n: int):
         for word in text:
             buffer[word] += 1
 
-    print(buffer.most_common(int(n)))
+    print(buffer.most_common(n))
 
-
+          
 if __name__ == '__main__':
     main()
